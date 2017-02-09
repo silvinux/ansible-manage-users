@@ -1,0 +1,8 @@
+---
+- name: Delete User
+  user:
+    name="{{ item.key }}"
+    state=absent
+    remove="{{ del_home | default(omit) }}"
+  with_dict: "{{ users_del_list | default({}) }}"
+  tags: "delete users"

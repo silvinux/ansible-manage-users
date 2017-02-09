@@ -1,0 +1,35 @@
+---
+  - hosts: lab
+    gather_facts: yes
+    remote_user: root 
+    #become: yes
+    #become_method: sudo
+    roles:
+      - role: manage-users
+        addgroup: true
+        adduser: true
+        chageuser: true
+        delgroup: false
+        deluser: true
+        groups_list:
+          usertest: { gid: 140000 }
+          usertest01: { gid: 140001 }
+          'user-1': { gid: 140002 }
+          'user-2': { gid: 140003 }
+          'user-3': { gid: 140004 }
+          'user-4': { gid: 140005 }
+        password: "{{ item.value.pwd }}"
+        update_pwd: "always"
+        chg_pwd: "Do-not-chg-pwd-Non-expiring"
+        groups_secondary: ""
+        shell: "/bin/bash"
+        users_list:
+          usertest: { uid: 140000, groups: "", group: 140000, com: "User adm Account", pwd: "&jZ/B70z" }
+          'usertest01': { uid: 140001, groups: "", group: 140001, com: "User test", pwd: "wQ+L?1N" }
+          'user-1': { uid: 140002, groups: "", group: 140002, com: "User user-1 Account", pwd: "15zvn?BC" }
+          'user-2': { uid: 140003, groups: "", group: 140003, com: "User user-2 Account", pwd: "1?&+8e.Y1" }
+          'user-3': { uid: 140004, groups: "", group: 140004, com: "User user-3 Account", pwd: "&O3*Ts1?&O" }
+          'user-4': { uid: 140005, groups: "", group: 140005, com: "User user-4 Account", pwd: "+4!5A-8K"}
+        users_del_list:
+          usertestt: { uid: 140000, groups: "", group: 140000, com: "User userin Account", pwd: "&jZ/B70z" }
+  

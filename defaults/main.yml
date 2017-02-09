@@ -1,0 +1,19 @@
+---
+## Activate/deactivate functions
+addgroup: false
+adduser: false
+chageuser: false
+delgroup: false
+deluser: false
+
+### Users Parameters - Add users
+password: "{{item.key }}"
+#password: "{{ item.value.pwd }}"
+#shell: "{{ item.value.shell }}"
+chg_pwd: "Force-chg-pwd" ###Force-chg-pwd-Non-expiring|Do-not-chg-pwd-Non-expiring###
+update_pwd: "on_create"  ###always|on_create###
+non_unique: no
+createhome: yes
+
+### Users Parameters - delete users
+del_home: no

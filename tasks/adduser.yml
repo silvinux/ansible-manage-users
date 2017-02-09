@@ -1,0 +1,17 @@
+---
+- name: Create Users
+  user:
+    name="{{ item.key }}"
+    uid="{{ item.value.uid }}"
+    append=yes
+    state="present"
+    password="{{ password | password_hash('sha512') }}"
+    shell="{{ shell | default("/bin/bash") }}"
+    group="{{ item.value.group | default(omit) }}"
+    groups="{{ item.value.groups | default(omit) }}"
+    home="{{ item.value.home | default(omit) }}"
+    update_password="{{ update_pwd | default(omit) }}"
+    comment="{{ item.value.com | default(omit) }}"
+    createhome="{{ createhome | default(omit) }}"
+    non_unique="{{ non_unique | default(omit) }}"
+  with_dict: "{{ users_list | default({}) }}"

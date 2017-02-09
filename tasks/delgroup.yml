@@ -1,0 +1,8 @@
+---
+- name: Delete Groups
+  group: 
+    name="{{ item.key }}" 
+    gid="{{ item.value.gid | default(omit) }}" 
+    state=absent
+  with_dict: "{{ groups_del_list | default({}) }}"
+  tags: "delete groups"

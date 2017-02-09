@@ -1,0 +1,24 @@
+# chage -I -1 -m 0 -M 99999 -E -1 -d 0
+#  - sp_inact: -1
+#  - sp_min: 0
+#  - sp_max: 99999
+#  - sp_expire: -1
+#  - sp_lstchg: 0
+
+# Force to change password at next logon - chage -d 0 
+- name: Force-chg-pwd
+  chage: user="{{ item.key }}" sp_lstchg=0
+  with_dict: "{{ users_list | default({}) }}"
+  when: chg_pwd == "Force-chg-pwd"
+
+# To disable password aging/expiration and force to change password at next logon  - chage -I -1 -m 0 -M 99999 -E -1 -d 0
+- name: Force-chg-pwd-Non-expiring
+  chage: user="{{ item.key }}" sp_inact=-1 sp_min=0 sp_max=99999 sp_expire=-1 sp_lstchg=0
+  with_dict: "{{ users_list | default({}) }}"
+  when: chg_pwd == "Force-chg-pwd-Non-expiring"
+
+# To disable password aging/expiration - chage -I -1 -m 0 -M 99999 -E -1
+- name: Do-not-chg-pwd-Non-expiring 
+  chage: user="{{ item.key }}" sp_inact=-1 sp_min=0 sp_max=99999 sp_expire=-1 
+  with_dict: "{{ users_list | default({}) }}"
+  when: chg_pwd == "Do-not-chg-pwd-Non-expiring"

@@ -1,0 +1,15 @@
+---
+- include: "deluser.yml"
+  when: deluser == true
+
+- include: "delgroup.yml"
+  when: delgroup == true
+
+- include: "addgroup.yml"
+  when: addgroup == true
+
+- include: "adduser.yml"
+  when: adduser == true
+
+- include: "chageuser.yml"
+  when: chageuser == true

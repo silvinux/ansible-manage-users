@@ -1,0 +1,8 @@
+---
+- name: Create Groups
+  group: 
+    name="{{ item.key }}" 
+    gid="{{ item.value.gid | default(omit) }}" 
+    state=present
+  with_dict: "{{ groups_list | default({}) }}"
+  tags: "create groups"

@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: silvinux
+  description: User/Groups management (add/del)
+  company: N/A
+  license: GPLv3
+  min_ansible_version: 2.2
+  platforms:
+  - name: EL
+    versions:
+    - all
+  galaxy_tags:
+    - useradd
+    - groupadd
+    - userdel
+    - groupdel
+    - usermod
+    - user-management
+    - group-management
+dependencies: []

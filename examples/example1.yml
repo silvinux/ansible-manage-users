@@ -1,0 +1,45 @@
+---
+  - hosts: lab
+    gather_facts: yes
+    remote_user: root 
+    #become: yes
+    #become_method: sudo
+    roles:
+      - role: manage-users
+        ###Activate/deactivate functions
+        addgroup: true
+        adduser: true
+        chageuser: true
+        delgroup: false
+        deluser: false
+        ###USER/GROUP variables
+        password: "{{item.key }}_4ns1bl3"         ## pwd will be the username + string "User_Test_4ns1bl3"
+        chg_pwd: "Force-chg-pwd-Non-expiring"
+        groups_secondary: "1200,1201,1202,1203,1204,1205"
+        groups_2: "1200,1203,1204,1205,1206,1209,1210,1211"
+        ###GROUP LIST
+        #groups_del_list:
+        groups_list:
+          oinstall: { gid: 1200 }
+          oinventory: { gid: 1201 }
+          asmadmin:  { gid: 1202 }
+          asmdba: { gid: 1203 }
+          asmoper: { gid: 1204 }
+          dba: { gid: 1205 }
+          oper: { gid: 1206 }
+          gdba: { gid: 1208 }
+          backupdba: { gid: 1209 }
+          dgdba: { gid: 1210 }
+          kmdba: { gid: 1211 }
+        ###USER LIST
+        #users_del_list: 
+        users_list:
+          orainfra: { uid: 1220, group: 1200, groups: "{{ groups_secondary }}", com: "User Oracle-Infra"}
+          oraagent: { uid: 1225, group: 1200, groups: "{{ groups_secondary }}", com: "User Oracle-Agent"}
+          oragdba: { uid: 1227, group: 1208, groups: , com: "User Oracle-GDBA" }
+          oraodi: { uid: 1228, group: 1200, groups: , com: "User Oracle-ODI" }
+          oragg: { uid: 1229, group: 1200, groups: , com: "User Oracle-GG" }
+          oracle: { uid: 9000, group: 1200, groups: "{{ groups_2 }}", com: "User Oracle" }
+          oratsta: { uid: 9001, groups: "{{ groups_2 }}", group: 1200, com: "User Oracle-TSTA" }
+          oratstb: { uid: 9002, groups: "{{ groups_2 }}", group: 1200, com: "User Oracle-TSTB" }
+          oratstc: { uid: 9003, groups: "{{ groups_2 }}", group: 1200, com: "User Oracle-TSTC" }
